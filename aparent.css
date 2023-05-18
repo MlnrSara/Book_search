@@ -1,0 +1,16 @@
+ div {
+    color: darkred;
+    font-size: medium;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: oblique;
+    line-height: 1.5;
+    text-align: left;
+}
+body{
+    background-color: peachpuff;
+}
+button{
+    background-color: white;
+    color: darkred;
+    border-radius: 5px;
+}

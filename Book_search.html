@@ -1,0 +1,70 @@
+<html lang = "en-US">
+  <link href = "../atom/aparent.css" rel ='stylesheet'>
+  <head>
+    <title>Book Search</title>
+
+  </head>
+  <body>
+    <h3>Traduceti aceasta pagina</h3>
+
+    <div id="google_translate_element"></div>
+    <br>
+    <input type="text" id="search" />
+    <button id = "searchbtn" onclick="receive()"> SEARCH </button>
+    <button id = "refreshbtn" onclick = "clear()"> CLEAR </button>
+    <script>
+      function clear()
+    {
+      document.getElementsByClassName("docoment").textContent = "";
+    }
+    </script>
+    <script>
+      var input = document.getElementById("search");
+      input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("searchbtn").click();
+        }
+      });
+      </script>
+    <div id="content"></div>
+
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+
+    <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!--pana aici se face operatiunea de traducere a continutului-->
+   <script>
+      function handleResponse(response) {
+		console.log(response);
+		for (var i = 0; i < response.items.length; i++) {
+         var item = response.items[i];
+         // in production code, item.text should have the HTML entities escaped.
+         document.getElementById("content").innerHTML += "<div class = 'docoment'>" + item.volumeInfo.title + "</div>";
+		}
+     }
+
+      function receive(){
+          var book = document.getElementById("search").value;
+
+          var request = "https://www.googleapis.com/books/v1/volumes?q=" + book;
+          console.log(request);
+          let response =  fetch(request)
+		          .then(response => response.json())
+              .then(result => {
+				            handleResponse(result);
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+    }
+
+    </script>
+
+    <!--script src="https://www.googleapis.com/books/v1/volumes?q=book&callback=handleResponse"></script-->
+  </body>
+</html>
