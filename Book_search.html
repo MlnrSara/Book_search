@@ -1,70 +1,54 @@
-<html lang = "en-US">
-  <link href = "../atom/aparent.css" rel ='stylesheet'>
-  <head>
-    <title>Book Search</title>
+<!DOCTYPE html>
+<html lang="en-US">
 
-  </head>
-  <body>
-    <h3>Traduceti aceasta pagina</h3>
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+	<link href="./aparent.css" rel="stylesheet" />
+	<link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
-    <div id="google_translate_element"></div>
-    <br>
-    <input type="text" id="search" />
-    <button id = "searchbtn" onclick="receive()"> SEARCH </button>
-    <button id = "refreshbtn" onclick = "clear()"> CLEAR </button>
-    <script>
-      function clear()
-    {
-      document.getElementsByClassName("docoment").textContent = "";
-    }
-    </script>
-    <script>
-      var input = document.getElementById("search");
-      input.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          document.getElementById("searchbtn").click();
-        }
-      });
-      </script>
-    <div id="content"></div>
+	<title>Book Search</title>
+
+</head>
+
+<body onload="onPageLoad()">
+	<div class="container">
+		<img src="R.jpg" width="100%" />
+		<span style='text-align: center;'>
+			<h2>Bine ati venit in biblioteca virtuala</h2>
+		</span>
+		<h4>Va invit sa cautati orice titlu</h4>
+
+		<div>
+			<h6>Schimbati limba paginii: </h6>
+			<div id="google_translate_element"></div>
+		</div>
 
 
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
-    </script>
+		<div class="search-input">
+			<div class="input-group mb-3 mt-3 me-1">
+				<input type="text" id="search" class="form-control" placeholder="Cauta o carte..." />
+				<button class="input-group-text" id="searchbtn" onclick="receive()"><i
+						class="fa fa-search"></i></button>
+			</div>
 
-    <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <!--pana aici se face operatiunea de traducere a continutului-->
-   <script>
-      function handleResponse(response) {
-		console.log(response);
-		for (var i = 0; i < response.items.length; i++) {
-         var item = response.items[i];
-         // in production code, item.text should have the HTML entities escaped.
-         document.getElementById("content").innerHTML += "<div class = 'docoment'>" + item.volumeInfo.title + "</div>";
-		}
-     }
+			<button id="refreshbtn" class="ms-1" onclick="clearList()">STERGE</button>
+		</div>
 
-      function receive(){
-          var book = document.getElementById("search").value;
+		<div id="content"></div>
 
-          var request = "https://www.googleapis.com/books/v1/volumes?q=" + book;
-          console.log(request);
-          let response =  fetch(request)
-		          .then(response => response.json())
-              .then(result => {
-				            handleResponse(result);
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              });
-    }
+		<div class="spinner-border" role="status" style="display: none; color: #ed8d37">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+	</div>
 
-    </script>
+	<!-- external scripts -->
+	<script type="text/javascript"
+		src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <!--script src="https://www.googleapis.com/books/v1/volumes?q=book&callback=handleResponse"></script-->
-  </body>
+	<!-- my scripts -->
+	<script type="text/javascript" src="./actions.js"></script>
+</body>
+
 </html>

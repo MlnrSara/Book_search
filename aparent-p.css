@@ -1,13 +1,41 @@
-p{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.container {
+    margin: 100px;
+}
+
+body {
+    background-color: peachpuff;
+    font-family: 'Times New Roman';
+}
+
+h1 {
+    font-size: 4em;
+    text-align: center;
+    font-style: oblique;
+}
+
+img {
+    margin-left: 0;
+}
+
+#name {
+    text-align: right;
+}
+
+p {
     text-align: justify;
-    font-size:1em;
+    font-size: 1.5em;
     line-height: 1.5;
+    color: black;
 }
-p + p{
-    text-indent: 1.5em
-}
-h1 + p:first-letter{
-    font-size: 2em;
+
+
+#first:first-letter {
+    font-size: 3em;
     line-height: 0;
-} 
+}
+
+a {
+    color: darkred;
+    align-content: left;
+    size: 2em;
+}
