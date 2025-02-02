@@ -14,3 +14,26 @@ button{
     color: darkred;
     border-radius: 5px;
 }
+
+.container{
+    margin-top: 20px;
+}
+
+.search-input{
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+input:focus {
+    outline: none!important;   
+    box-shadow: none!important;
+}
+
+tr{
+    border-color: #ed8d3733;
+}
+
